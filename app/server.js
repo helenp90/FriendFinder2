@@ -2,6 +2,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
+var http = require("http");
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -10,7 +11,7 @@ var PORT = 8080;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Create our server
-var http = require("http");
+
 var server = http.createServer(handleRequest);
 // Create a function for handling the requests and responses coming into our server
 function handleRequest(req, res) {
