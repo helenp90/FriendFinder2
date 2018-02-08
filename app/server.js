@@ -1,8 +1,14 @@
 //Dependencies
-var http = require("http");
-var fs = require("fs");
-// Set our port to 8080
-var PORT = 8080;
+var express = require("express");
+var bodyParser = require("body-parser");
+var path = require("path");
+// Sets up the Express App
+// =============================================================
+var app = express();
+var PORT = 3000;
+// Sets up the Express app to handle data parsing
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // Create our server
 var server = http.createServer(handleRequest);
 // Create a function for handling the requests and responses coming into our server
