@@ -13,7 +13,7 @@ module.exports = function(app) {
   // (ex: localhost:PORT/api/friends... they are shown a JSON of the data in the table)
   // ---------------------------------------------------------------------------
 
-  app.get("/api/friends", function(req, res) {
+  app.get("../data/friends", function(req, res) {
     res.json(friends);
   });
 
@@ -24,7 +24,7 @@ module.exports = function(app) {
   // Then the server saves the data to the friend array)
   // ---------------------------------------------------------------------------
 
-  app.post("/api/friends", function(req, res) {
+  app.post("../data/friends", function(req, res) {
       friends.push(req.body);
       res.json(true);
   });
