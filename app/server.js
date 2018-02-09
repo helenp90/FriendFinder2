@@ -1,30 +1,30 @@
 //Dependencies
+var inquirer = require("inquirer");
 var express = require("express");
 var bodyParser = require("body-parser");
-var path = require("path");
-var http = require("http");
+
 // Sets up the Express App
 // =============================================================
+// This tells node we're creating an express server.
 var app = express();
-var PORT = 8080;
+//setting initial port
+var PORT = process.env.PORT || 3004;
+
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// Create our server
 
-var server = http.createServer(handleRequest);
-// Create a function for handling the requests and responses coming into our server
-function handleRequest(req, res) {
-    var fs = require("fs")
-  // Here we use the fs package to read our index.html file
-  fs.readFile(__dirname + "/public/home.html", function(err, data) {
-    // We then respond to the client with the HTML page by specifically telling the browser that we are delivering
-    // an html file.
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(data);
-  });
-}
-// Starts our server
-server.listen(PORT, function() {
-  console.log("Server is listening on PORT: " + PORT);
+//Router
+//Points server to the route files.
+// They map the server response when the users visit or request data from the urls.
+require("../app/routing/apiRoutes")(app);
+require("../app/routing/htmlRoutes")(app);
+
+// =============================================================================
+// LISTENER
+// The below code effectively "starts" the server
+// =============================================================================
+
+app.listen(PORT, function() {
+  console.log("App listening on PORT: " + PORT);
 });
